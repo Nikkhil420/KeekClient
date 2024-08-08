@@ -166,10 +166,10 @@ const ManageCampaign = () => {
                Interest Received
               </button>
             </Link>
-            <Link to="/manageCampaign/Shortlisted">
+            <Link to="/Shortlisted">
               <button
                 className={`py-2 px-4 ${
-                  location.pathname === "/manageCampaign/Shortlisted"
+                  location.pathname === "/Shortlisted"
                     ? "text-primary border-b-2 border-blue-500 font-semibold"
                     : "text-muted hover:text-muted-foreground"
                 }`}
@@ -177,10 +177,10 @@ const ManageCampaign = () => {
                 Shortlisted
               </button>
             </Link>
-            <Link to="/manageCampaign/Approved">
+            <Link to="/Approved">
               <button
                 className={`py-2 px-4 ${
-                  location.pathname === "/manageCampaign/Approved"
+                  location.pathname === "/Approved"
                     ? "text-primary border-b-2 border-blue-500 font-semibold"
                     : "text-muted hover:text-muted-foreground"
                 }`}
@@ -188,10 +188,10 @@ const ManageCampaign = () => {
                Approved
               </button>
             </Link>
-            <Link to="/manageCampaign/Rejected">
+            <Link to="/Rejected">
               <button
                 className={`py-2 px-4 ${
-                  location.pathname === "/manageCampaign/Rejected"
+                  location.pathname === "/Rejected"
                     ? "text-primary border-b-2 border-blue-500 font-semibold"
                     : "text-muted hover:text-muted-foreground"
                 }`}
@@ -199,10 +199,10 @@ const ManageCampaign = () => {
                Rejected
               </button>
             </Link>
-            <Link to="/manageCampaign/AIRecommended">
+            <Link to="/AIRecommended">
               <button
                 className={`py-2 px-4 ${
-                  location.pathname === "/manageCampaign/AIRecommended"
+                  location.pathname === "/AIRecommended"
                     ? "text-primary border-b-2 border-blue-500 font-semibold"
                     : "text-muted hover:text-muted-foreground"
                 }`}
@@ -217,7 +217,7 @@ const ManageCampaign = () => {
           </div>
         </div>
 
-
+nikhil/....
       
 
       </div>

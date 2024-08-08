@@ -52,16 +52,15 @@ const MainRouter = () => {
             </div>
           }
         />
-        <Route path="/manageCampaign" element={<ManageCampaign />}>
         
-        <Route path="Shortlisted" element={<ShortlistedPage />} />
-
-        <Route path="Approved" element={<ApprovedPage />} />
-        <Route path="Rejected" element={<RejectedPage />} />
-
-        <Route path="AIRecommended" element={<AIRecommendPage />} />
+        <Route path="/manageCampaign" element={<ManageCampaign />}/>
         
-        </Route>
+        <Route path="/Shortlisted" element={<ShortlistedPage />} />
+
+        <Route path="/Approved" element={<ApprovedPage />} />
+        <Route path="/Rejected" element={<RejectedPage />} />
+
+        <Route path="/AIRecommended" element={<AIRecommendPage />} />
 
         <Route
           path="/influencersBase"
