@@ -485,41 +485,28 @@ const LiveCampaign = () => {
                             </div>
                           </div>
                           <div className="flex flex-col md:flex-row gap-3 md:w-1/3">
-                            <div className="space-y-10">
+                            <div className="space-y-10 ml-4">
                               <div>
                                 <span className="font-body text-[#797A7B] text-[12px] font-normal">
                                   COMPENSATION:
                                 </span>
                                 <p className="font-body text-[16px] font-normal">
-                                  {campaignDetails.compensation.map(
-                                    (comp, index) => (
-                                      <p
-                                        key={index}
-                                        className="font-body text-[16px] font-normal"
-                                      >
-                                        {comp}
-                                      </p>
-                                    )
-                                  )}
+                                <p className="font-body text-[16px] font-normal">
+  {campaignDetails.compensation.join(', ')}
+</p>
                                 </p>
                               </div>
                               <div>
                                 <span className="font-body text-[#797A7B] text-[12px] font-normal">
                                   TARGET AUDIENCE:
                                 </span>
-                                {campaignDetails.targetAudience.map(
-                                  (audience, index) => (
-                                    <p
-                                      key={index}
-                                      className="font-body text-[16px] font-normal"
-                                    >
-                                      {audience}
-                                    </p>
-                                  )
-                                )}
+                             
+                                           <p className="font-body text-[16px] font-normal">
+  {campaignDetails.targetAudience.join(', ')}
+</p>
                               </div>
                             </div>
-                            <div className="space-y-10">
+                            <div className="space-y-10 ml-16">
                               <div>
                                 <span className="font-body text-[#797A7B] text-[12px] font-normal">
                                   PARTICIPANTS:

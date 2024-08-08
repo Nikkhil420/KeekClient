@@ -129,7 +129,7 @@ const ManageCampaign = () => {
               </div>
             </div>
             <div className="space-y-10">
-              <div className="ml-24">
+              <div className="ml-16">
                 <span className="font-body text-[#797A7B] text-xs font-normal">
                   LOCATION:
                 </span>
