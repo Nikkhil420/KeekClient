@@ -300,7 +300,7 @@ const PastCampaign = () => {
                                 <p className="font-body text-[16px] font-normal">
                                   <span className="text-[#22C55E]">
                                     {campaignDetails.participants}/
-                                  </span>{" "}
+                                  </span>
                                   100
                                 </p>
                               </div>

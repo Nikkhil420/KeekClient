@@ -512,9 +512,9 @@ const LiveCampaign = () => {
                                   PARTICIPANTS:
                                 </span>
                                 <p className="font-body text-[16px] font-normal">
-                                  <span className="text-[#22C55E]">
+                                  <span className="text-[#0062F5]">
                                     {campaignDetails.participants}/
-                                  </span>{" "}
+                                  </span>
                                   100
                                 </p>
                               </div>
