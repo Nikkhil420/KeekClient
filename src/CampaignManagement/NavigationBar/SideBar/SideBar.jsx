@@ -79,7 +79,7 @@ export function SidebarItem({ icon, text, alert, children, customClass }) {
     <div className='relative'>
       <li
         onClick={handleClick}
-        className={`relative flex items-center py-1 rounded font-medium cursor-pointer transition-colors duration-150
+        className={`relative flex items-center mt-0.5 rounded font-medium cursor-pointer transition-colors duration-150
           ${isSelected ? "border-r-4 border-blue-500 text-blue-500" : ""} ${expanded ? "" : "h-10"} ${customClass}`}
         style={{ padding: expanded ? '0.25rem 0.5rem' : '0.25rem', width: expanded ? 'auto' : 'max-content' }}
       >

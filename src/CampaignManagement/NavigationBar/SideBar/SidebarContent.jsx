@@ -1,16 +1,14 @@
 import React from 'react';
 import SideBar, { SidebarItem, SidebarContext } from './SideBar';
-import { CalendarDays, Settings, Headphones } from 'lucide-react';
+import { Settings, Headphones } from 'lucide-react';
 import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { CgUserList } from "react-icons/cg"
 import { CgCrown } from "react-icons/cg";
-import { FiUser } from "react-icons/fi";
 import { MdAttachMoney } from "react-icons/md";
 
 import { Link } from 'react-router-dom';
-import { AiOutlineLike } from "react-icons/ai";
 import { LuPieChart } from "react-icons/lu";
-import { IoPaperPlaneOutline } from "react-icons/io5";
+
 
 const SidebarContent = () => {
   return (
@@ -30,15 +28,8 @@ const SidebarContent = () => {
           </SidebarItem>
         </Link>
 
-        <Link to={"/Profile"}>
-          <SidebarItem
-            icon={<FiUser size={20} />}
-            text="Profile"
-          />
-        </Link>
-
-        <Link to={"/manageCampaign"}>
-          <SidebarItem icon={<CgCrown size={20} />} text="Manage Campaign" />
+        <Link to={"/CampaignManagement"}>
+          <SidebarItem icon={<CgCrown size={20} />} text="Campaign Management" />
         </Link>
 
 
@@ -48,9 +39,7 @@ const SidebarContent = () => {
             text="Discover Influencers"
           />
         </Link>
-        <Link to={"/Messages"}>
-          <SidebarItem icon={<IoPaperPlaneOutline size={20} />} text="Messages" />
-        </Link>
+  
         <Link to={"/payments"}>
           <SidebarItem icon={<MdAttachMoney size={20} />} text="Payments" />
         </Link>
@@ -58,13 +47,6 @@ const SidebarContent = () => {
           <SidebarItem icon={<LuPieChart size={20} />} text="Analytics" />
         </Link>
       
-        <Link to={"/ratingAndFeedback"}>
-          <SidebarItem
-            icon={<AiOutlineLike size={20} />}
-            text="Rating & Feedback"
-          />
-        </Link>
-
         <SidebarContext.Consumer>
           {({ expanded }) =>
             expanded ? (

@@ -1,5 +1,5 @@
 import React from 'react'
-import SidebarContent from '../ManageCampaign/NavigationBar/SideBar/SidebarContent'
+import SidebarContent from '../CampaignManagement/NavigationBar/SideBar/SidebarContent'
 import MainRouter from '../MainRouter/MainRouter'
 
 const MainLayout = () => {

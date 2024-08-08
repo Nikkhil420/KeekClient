@@ -1,42 +1,39 @@
-
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import LiveCampaign from "../ManageCampaign/LiveCampaign/LiveCampaign";
-import PastCampaign from "../ManageCampaign/PastCampaign/PastCampaign";
-import DraftCampaign from "../ManageCampaign/DraftCampaign/DraftCampaign";
-
-
-
+import LiveCampaign from "../CampaignManagement/LiveCampaign/LiveCampaign";
+import PastCampaign from "../CampaignManagement/PastCampaign/PastCampaign";
+import DraftCampaign from "../CampaignManagement/DraftCampaign/DraftCampaign";
+import ManageCampaign from "../CampaignManagement/ManageCampaign/ManageCampaign";
+import ShortlistedPage from "../CampaignManagement/ManageCampaign/ManageCampaignPages/ShortlistedPage";
+import ApprovedPage from "../CampaignManagement/ManageCampaign/ManageCampaignPages/ApprovedPage";
+import RejectedPage from "../CampaignManagement/ManageCampaign/ManageCampaignPages/RejectedPage";
+import AIRecommendPage from "../CampaignManagement/ManageCampaign/ManageCampaignPages/AIRecommendPage";
 
 const MainRouter = () => {
   return (
     <>
       <Routes>
-        <Route path="/" 
-        element={
-          <div className="h-screen w-screen flex items-center justify-center bg-slate-400">
-          {" "}
-             Di
-        </div>
-        } 
+        <Route
+          path="/"
+          element={
+            <div className="h-screen w-screen flex items-center justify-center bg-slate-400">
+              {" "}
+              Di
+            </div>
+          }
         />
 
         <Route
           path="/discoverInfluencers"
-            element={
+          element={
             <div className="h-screen w-screen flex items-center justify-center bg-slate-400">
               {" "}
               discoverInfluencers
             </div>
           }
         />
-        <Route
-          path="/manageCampaign"
-          element={
-            <LiveCampaign/>
-          }
-        />
-       
+        <Route path="/CampaignManagement" element={<LiveCampaign />} />
+
         <Route
           path="/payments"
           element={
@@ -46,7 +43,7 @@ const MainRouter = () => {
             </div>
           }
         />
-          <Route
+        <Route
           path="/viewFavourites"
           element={
             <div className="h-screen w-screen flex items-center justify-center bg-slate-400">
@@ -55,16 +52,17 @@ const MainRouter = () => {
             </div>
           }
         />
-         <Route
-          path="/viewProfile"
-          element={
-            <div className="h-screen w-screen flex items-center justify-center bg-slate-400">
-              {" "}
-              viewProfile
-            </div>
-          }
-        />
-      
+        <Route path="/manageCampaign" element={<ManageCampaign />}>
+        
+        <Route path="Shortlisted" element={<ShortlistedPage />} />
+
+        <Route path="Approved" element={<ApprovedPage />} />
+        <Route path="Rejected" element={<RejectedPage />} />
+
+        <Route path="AIRecommended" element={<AIRecommendPage />} />
+        
+        </Route>
+
         <Route
           path="/influencersBase"
           element={
@@ -92,43 +90,12 @@ const MainRouter = () => {
             </div>
           }
         />
-        
+
+        <Route path="/PastCampaign" element={<PastCampaign />} />
+        <Route path="/DraftCampaign" element={<DraftCampaign />} />
+
        
-        <Route
-          path="/PastCampaign"
-          element={<PastCampaign/>}
-        />
-         <Route
-          path="/DraftCampaign"
-          element={<DraftCampaign/> }
-        />
-         {/* <Route
-          path="/CampaignSummary"
-          element={<CampaignSummary/>}
-        />
-        <Route
-          path="/ActiveCampaign"
-          element={<ActiveCampaign/>}
-        />
-        
-        <Route
-          path="/musicList"
-          element={<MusicList/>}
-        />
-         <Route
-          path="/ratingAndFeedback"
-          element={<FeedbackComponent/>}
-        />
-
-<Route
-          path="/Calendar"
-          element={<CalendarEvents/>}
-        />
-         */}
-
-
       </Routes>
-      
     </>
   );
 };
