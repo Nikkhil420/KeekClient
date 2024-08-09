@@ -56,7 +56,7 @@ const ShortlistedPage = () => {
   const influencers = [
     {
       name: "Gautam Sachdeva",
-      niche: ["Travel","Fashion"],
+      niche: ["Travel","Fashion","Clothes","foods","Fashion","Clothes"],
       platforms: {
         instagram: "Instagram",
         facebook: "Facebook",
@@ -76,7 +76,7 @@ const ShortlistedPage = () => {
     },
     {
       name: "Gautam Sachdeva",
-      niche: ["Travel", "Fashion","Clothes","foods","hjhfjh","hjhf"],
+      niche: ["Travel", "Fashion","Clothes","foods","Fashion","Clothes"],
       platforms: {
         instagram: "Instagram",
         facebook: "Facebook",
@@ -86,7 +86,7 @@ const ShortlistedPage = () => {
     },
     {
       name: "Gautam Sachdeva",
-      niche: ["Travel", "Fashion","Clothes","foods","hhg"],
+      niche: ["Travel", "Fashion","Clothes","Fashion","Clothes"],
       platforms: {
         instagram: "Instagram",
         facebook: "Facebook",
@@ -96,7 +96,7 @@ const ShortlistedPage = () => {
     },
     {
       name: "Gautam Sachdeva",
-      niche: ["Travel", "Fashion","Clothes","foods","ythhfj","hjkrj"],
+      niche: ["Travel", "Fashion","Clothes","foods"],
       platforms: {
         instagram: "Instagram",
         facebook: "Facebook",
@@ -319,9 +319,11 @@ const ShortlistedPage = () => {
                       {influencer.name}
                     </div>
                     <div className="text-[#191d23] text-base font-normal w-[210px] text-nowrap font-['Open Sans']">
-                      {influencer.niche[0]} <span className={`${influencer.niche[1] ? "inline-block": "hidden" }`}>,</span> {influencer.niche[1] && influencer.niche[1]} <span className={`${influencer.niche[2] ? "inline-block": "hidden" }`}>,</span> <span className={`${influencer.niche.length > 2 ? "inline-block": "hidden" }`}>+</span> {
-                        <span className={`${influencer.niche.length <= 2 && 'hidden'} `}>{influencer.niche.length - 2}</span>
-                      }
+                    <td className="py-3 px-4 text-[#191D23] text-[16px] font-body font-normal">
+                    {influencer.niche.length > 2
+                      ? `${influencer.niche.slice(0, 2).join(', ')} +${influencer.niche.length - 2}`
+                      : influencer.niche.join(', ')}
+                  </td>
                     </div>
                   </div>
                   <button className="flex justify-start items-center">
