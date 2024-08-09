@@ -10,8 +10,7 @@ import X from "../../Assets/X.png";
 import Facebook from "../../Assets/Facebook.png";
 import YT from "../../Assets/yt.png";
 import { FaCircleDot } from "react-icons/fa6";
-import { IoIosArrowForward } from "react-icons/io";
-import { IoIosArrowBack } from 'react-icons/io';
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
 const PastCampaign = () => {
   const contextState = useContext(Mycontext);
@@ -31,6 +30,40 @@ const PastCampaign = () => {
   };
 
   const campaigns = [
+    {
+      id: "C123456",
+      name: "Save Trees and More",
+      status: "Completed",
+      platform: ["Instagram", "Facebook", "Twitter"],
+      startDate: "1 July 24",
+      endDate: "10 July 24"
+    },
+
+    {
+      id: "C123456",
+      name: "Save Trees and More",
+      status: "Completed",
+      platform: ["Instagram", "Facebook", "Twitter"],
+      startDate: "1 July 24",
+      endDate: "10 July 24"
+    },
+    {
+      id: "C123456",
+      name: "Save Trees and More",
+      status: "Completed",
+      platform: ["Instagram", "Facebook", "Twitter"],
+      startDate: "1 July 24",
+      endDate: "10 July 24"
+    },
+
+    {
+      id: "C123456",
+      name: "Save Trees and More",
+      status: "Completed",
+      platform: ["Instagram", "Facebook", "Twitter"],
+      startDate: "1 July 24",
+      endDate: "10 July 24"
+    },
     {
       id: "C123456",
       name: "Save Trees and More",
@@ -108,27 +141,30 @@ const PastCampaign = () => {
 
   
 
-  const recordsPerPage = 5;
+  const itemsPerPage = 5;
 
-  const lastIndex = currentPage * recordsPerPage;
-  const firstIndex = lastIndex - recordsPerPage;
+  const lastIndex = currentPage * itemsPerPage;
+  const firstIndex = lastIndex - itemsPerPage;
   const records = campaigns.slice(firstIndex, lastIndex);
-  const npage = Math.ceil(campaigns.length / recordsPerPage);
-  const prePage = () => {
-    if (currentPage !== 1) {
+  const totalPages = Math.ceil(campaigns.length / itemsPerPage);
+  const handlePrevClick = () => {
+    if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
   };
 
-  const changePage = (id) => {
-    setCurrentPage(id);
+  const handleNextClick = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
   };
 
-  const nextPage = () => {
-    if (currentPage !== npage) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const selectedInfluencers = records.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
+
 
   return (
     <div
@@ -259,69 +295,103 @@ const PastCampaign = () => {
                     </td>
                   </tr>
                   {openIndex === index && (
-                    <tr className="border-b-2 h-[91px] bg-[#F6F6F6]">
-                      <td colSpan="7" className=' '>
-                        <div className="flex flex-col md:flex-row w-full rounded-lg p-2 ">
+                    <tr className="border-b-2 w-full bg-[#F6F6F6]">
+                      <td colSpan="8">
+                        <div className="flex flex-col md:flex-row rounded-lg p-2 overflow-hidden">
                           <div className="p-2 mb-4 space-y-4 w-full md:w-1/2">
                             <div>
-                              <h2 className="font-body text-[#797A7B] text-[12px] font-normal">ABOUT CAMPAIGN</h2>
-                              <p className="font-body text-[16px] font-normal">{campaignDetails.about}</p>
+                              <h2 className="font-body text-[#797A7B] text-[12px] font-normal">
+                                ABOUT CAMPAIGN
+                              </h2>
+                              <p className="font-body text-[16px] font-normal">
+                                {campaignDetails.about}
+                              </p>
                             </div>
                             <div className="mt-2">
-                              <h3 className="font-body text-[#797A7B] text-[12px] font-normal">PLATFORMS:</h3>
-                              <div className="flex gap-1">
+                              <h3 className="font-body text-[#797A7B] text-[12px] font-normal">
+                                PLATFORMS:
+                              </h3>
+                              <div className="flex gap-2 flex-wrap">
                                 {platforms.map((platform, idx) => (
-                                  <div key={idx} className="flex items-center rounded-md px-1" style={{ backgroundColor: platform.bgColor }}>
-                                    <img src={platform.icon} alt={platform.name} />
-                                    <span className="px-2 py-1 rounded-full font-body text-[16px] font-normal">{platform.name}</span>
+                                  <div
+                                    key={idx}
+                                    className="flex items-center rounded-md px-1"
+                                    style={{
+                                      backgroundColor: platform.bgColor,
+                                    }}
+                                  >
+                                    <img
+                                      src={platform.icon}
+                                      alt={platform.name}
+                                    />
+                                    <span className="px-2 py-1 rounded-full font-body text-[16px] font-normal">
+                                      {platform.name}
+                                    </span>
                                   </div>
                                 ))}
                               </div>
                             </div>
                           </div>
-                          <div className="flex flex-col md:flex-row gap-6 md:w-1/3">
+                          <div className="flex flex-col md:flex-row gap-3 md:w-1/3">
                             <div className="space-y-10 ml-4">
-                              <div>
-                                <span className="font-body text-[#797A7B] text-[12px] font-normal">COMPENSATION:</span>
-                                <p className="font-body text-[16px] font-normal">
-  {campaignDetails.compensation.join(', ')}
-</p>
-                              </div>
-                              <div>
-                                <span className="font-body text-[#797A7B] text-[12px] font-normal">TARGET AUDIENCE:</span>
-                                <p className="font-body text-[16px] font-normal">
-  {campaignDetails.targetAudience.join(', ')}
-</p>
-                              </div>
-                            </div>
-                            <div className="space-y-10 ml-16">
-                              <div>
-                                <span className="font-body text-[#797A7B] text-[12px] font-normal">PARTICIPANTS:</span>
-                                <p className="font-body text-[16px] font-normal">
-                                  <span className="text-[#22C55E]">
+                            <div>
+                                <span className="font-body text-[#797A7B] text-[12px] font-normal">
+                                  PARTICIPANTS:
+                                </span>
+                                <p className="font-body text-xl font-normal">
+                                  <span className="text-[#0062F5]">
                                     {campaignDetails.participants}/
                                   </span>
                                   100
                                 </p>
                               </div>
                               <div>
-                                <span className="font-body text-[#797A7B] text-[12px] font-normal">LOCATION:</span>
+                                <span className="font-body text-[#797A7B] text-[12px] font-normal">
+                                  COMPENSATION:
+                                </span>
+                                <p className="font-body text-[16px] font-normal">
+                                <p className="font-body text-[16px] font-normal">
+  {campaignDetails.compensation.join(', ')}
+</p>
+                                </p>
+                              </div>
+                            
+                            </div>
+                            <div className="space-y-10 ml-16">
+                             
+                              <div>
+                                <span className="font-body text-[#797A7B] text-[12px] font-normal">
+                                  LOCATION:
+                                </span>
                                 {campaignDetails.location.map((loc, index) => (
-                  <p key={index} className="font-body text-[16px] font-normal">
-                    {loc}
-                  </p>
-                ))}
+                                  <p
+                                    key={index}
+                                    className="font-body text-[16px] font-normal"
+                                  >
+                                    {loc}
+                                  </p>
+                                ))}
                               </div>
                             </div>
                           </div>
-                          <div className=" flex items-center border-l-2 p-6 border-[#D2D3D3] ">
-                          <Link to={"/manageCampaign"}>
+                          <div className="mt-6 p-3 space-y-2 border-l-2 border-[#D2D3D3]">
+                            <Link to={"/manageCampaign"}>
                               <div>
-                                <button className="text-[#0066FF] font-body  text-[16px] font-normal">
+                                <button className="text-[#0066FF] font-body text-[16px] font-normal">
                                   Manage campaign
                                 </button>
                               </div>
                             </Link>
+                            <div>
+                              <button className="text-[#363939] font-body text-[16px] font-normal">
+                                Edit campaign
+                              </button>
+                            </div>
+                            <div>
+                              <button className="text-[#FA6A5E] font-body text-[16px] font-normal">
+                                Stop campaign
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </td>
@@ -334,37 +404,31 @@ const PastCampaign = () => {
         </div>
 
 
-        <nav className=" flex mt-6 items-center justify-end space-x-4 p-4">
-              <ul className="pagination flex space-x-2">
-                <li className="page-item">
-                  <button
-            onClick={prePage}
-            className="bg-secondary text-secondary-foreground hover:bg-secondary/80 p-2 rounded-lg"
-          >
-            <span>
-              {" "}
-              <IoIosArrowBack className="text-[#797A7B]" />
-            </span>
-          </button>
-                </li>
-                <span className="mt-1">
-              {currentPage} of {npage}
+
+        <div className="mt-auto flex justify-end p-8">
+            <div className="flex items-center gap-1 text-sm font-normal">
+              <button
+                onClick={handlePrevClick}
+                disabled={currentPage === 1}
+                className={`p-2 ${currentPage === 1 ? 'text-gray-400' : 'text-black'}`}
+              >
+                <FaAngleLeft />
+              </button>
+              <span className="text-[#1f2223]">
+                Page {currentPage}
               </span>
-        
-              
-                <li className="page-item">
-                 
-                  <button
-            onClick={nextPage}
-            className="bg-secondary text-secondary-foreground hover:bg-secondary/80 p-2 rounded-lg"
-          >
-            <span>
-              <IoIosArrowForward />
-            </span>
-          </button>
-                </li>
-              </ul>
-            </nav>
+              <span className="text-[#797a7b] leading-tight">
+                of {totalPages}
+              </span>
+              <button
+                onClick={handleNextClick}
+                disabled={currentPage === totalPages}
+                className={`p-2 ${currentPage === totalPages ? 'text-gray-400' : 'text-black'}`}
+              >
+                <FaAngleRight />
+              </button>
+            </div>
+          </div>
 
       </div>
     </div>

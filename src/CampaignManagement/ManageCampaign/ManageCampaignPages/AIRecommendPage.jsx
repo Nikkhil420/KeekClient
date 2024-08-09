@@ -112,7 +112,7 @@ const AIRecommendPage = () => {
                 <span className="font-body text-[#797A7B] text-[12px] font-normal">
                   PARTICIPANTS:
                 </span>
-                <p className="font-body text-[16px] font-normal">
+                <p className="font-body text-xl font-normal">
                                   <span className="text-[#0062F5]">
                                     {campaignDetails.participants} {""}/
                                   </span>{" "}
@@ -203,7 +203,7 @@ const AIRecommendPage = () => {
             <Link to="/AIRecommended">
               <button
                 className={`py-2 px-4 ${
-                  location.pathname === "/manageCampaign/AIRecommended"
+                  location.pathname === "/AIRecommended"
                     ? "text-primary border-b-2 border-blue-500 font-semibold"
                     : "text-muted hover:text-muted-foreground"
                 }`}

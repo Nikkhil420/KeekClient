@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Instagram from "../../Assets/instagram.png";
 import Facebook from "../../Assets/Facebook.png";
 import X from "../../Assets/X.png";
@@ -7,6 +7,8 @@ import { Mycontext } from "../../utils/Context";
 import { Link, useLocation } from "react-router-dom";
 import { MdChevronRight } from "react-icons/md";
 import ReadMore from "../Components/ReadMoreComponent";
+import { LuArrowUpRight,  } from "react-icons/lu";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
 const ManageCampaign = () => {
   const contextState = useContext(Mycontext);
@@ -44,7 +46,88 @@ const ManageCampaign = () => {
       bgColor: "#FFE4E1",
     },
   ];
-  
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const toggleModal = () => {
+    setIsModalVisible(!isModalVisible);
+  };
+
+  const influencers = [
+    {
+      name: "Gautam Sachdeva",
+      niche: ["Travel", "Fashion","hhjk","uuuss"],
+      platforms: {
+        instagram: "Instagram",
+        facebook: "Facebook",
+        youtube: "Youtube",
+        linkedin: "LinkedIn",
+      },
+    },
+    {
+      name: "Gautam Sachdeva",
+      niche: ["Travel", "Fashion","hhjk"],
+      platforms: {
+        instagram: "Instagram",
+        facebook: "Facebook",
+        youtube: "Youtube",
+        linkedin: "LinkedIn",
+      },
+    },
+    {
+      name: "Gautam Sachdeva",
+      niche: ["Travel", "Fashion","hhjk","uuuss","yyjjyjy"],
+      platforms: {
+        instagram: "Instagram",
+        facebook: "Facebook",
+        youtube: "Youtube",
+        linkedin: "LinkedIn",
+      },
+    },
+    {
+      name: "Gautam Sachdeva",
+      niche: ["Travel", "Fashion"],
+      platforms: {
+        instagram: "Instagram",
+        facebook: "Facebook",
+        youtube: "Youtube",
+        linkedin: "LinkedIn",
+      },
+    },
+    {
+      name: "Gautam Sachdeva",
+      niche: ["Travel", "Fashion","hhjk","uuuss","fhhffh","jjfhfhh"],
+      platforms: {
+        instagram: "Instagram",
+        facebook: "Facebook",
+        youtube: "Youtube",
+        linkedin: "LinkedIn",
+      },
+    },
+    
+    // Add more influencers here as needed
+  ];
+
+  const itemsPerPage = 4; // Number of influencers to display per page
+  const totalPages = Math.ceil(influencers.length / itemsPerPage);
+
+  const handlePrevClick = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextClick = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const selectedInfluencers = influencers.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
   return (
     <div
@@ -111,7 +194,7 @@ const ManageCampaign = () => {
                 <span className="font-body text-[#797A7B] text-[12px] font-normal">
                   PARTICIPANTS:
                 </span>
-                <p className="font-body text-[16px] font-normal">
+                <p className="font-body text-xl font-normal">
                                   <span className="text-[#0062F5]">
                                     {campaignDetails.participants} {""}/
                                   </span>{" "}
@@ -217,7 +300,102 @@ const ManageCampaign = () => {
           </div>
         </div>
 
-nikhil/....
+        <div className="mt-8">
+          <div className="flex text-[12px] font-sans font-semibold text-[#797a7b] ml-4">
+            <div className="w-[185px]">INFLUENCER NAME</div>
+            <div className="w-[230px]">NICHE</div>
+            <div className="w-[135px]">INSTAGRAM</div>
+            <div className="w-[125px]">FACEBOOK</div>
+            <div className="w-[115px]">YOUTUBE</div>
+            <div className="">LINKEDIN</div>
+          </div>
+          <hr className="border-t border-[#d2d3d3] my-3" />
+
+          {selectedInfluencers.map((influencer, index) => (
+            <div
+              key={index}
+              className="h-[99px] py-8 border-b border-[#d2d3d3] flex justify-start items-center ml-4 text-nowrap gap-[69px]"
+            >
+              <div className="flex justify-start items-center gap-[34px]">
+                <div className="flex justify-start items-center gap-[31px]">
+                  <div className="flex justify-start items-center gap-[37px]">
+                    <div className="w-[138px] h-[22px] text-[#191d23] text-base font-normal font-['Open Sans']">
+                      {influencer.name}
+                    </div>
+                    <div className="text-[#191d23] text-base font-normal w-[210px] text-nowrap font-['Open Sans']">
+                    {influencer.niche[0]} <span className={`${influencer.niche[1] ? "inline-block": "hidden" }`}>,</span> {influencer.niche[1] && influencer.niche[1]} <span className={`${influencer.niche[2] ? "inline-block": "hidden" }`}>,</span> <span className={`${influencer.niche.length > 2 ? "inline-block": "hidden" }`}>+</span> {
+                        <span className={`${influencer.niche.length <= 2 && 'hidden'} `}>{influencer.niche.length - 2}</span>
+                      }
+                    </div>
+                  </div>
+                  <button className="flex justify-start items-center">
+                    <a href="https://www.instagram.com/" className="text-[#191d23] flex text-base font-normal font-['Open Sans'] w-[100px]">
+                      {influencer.platforms.instagram}
+                      <LuArrowUpRight className="ml-1 mt-1 text-[#0066ff]" />
+                    </a>
+                  </button>
+                </div>
+                <button className="flex justify-start items-center">
+                  <a href="https://www.facebook.com/login/" className="text-[#191d23] flex text-base font-normal font-['Open Sans']">
+                    {influencer.platforms.facebook}
+                    <LuArrowUpRight className="ml-1 mt-1 text-[#0066ff]" />
+                  </a>
+                </button>
+                <button className="flex justify-start items-center">
+                  <a href="https://www.youtube.com/" className="text-[#191d23] text-base flex font-normal font-['Open Sans']">
+                    {influencer.platforms.youtube}
+                    <LuArrowUpRight className="ml-1 mt-1 text-[#0066ff]" />
+                  </a>
+                </button>
+                <button className="flex justify-start items-center">
+                  <a href="https://www.linkedin.com/" className="text-[#191d23] text-base font-normal flex font-['Open Sans']">
+                    {influencer.platforms.linkedin}
+                    <LuArrowUpRight className="ml-1 mt-1 text-[#0066ff]" />
+                  </a>
+                </button>
+              </div>
+              <div
+                className="font-semibold font-['Open Sans']"
+              >
+                <button className="text-[#e32828] relative w-[10px]">
+                  Reject
+                </button>
+              </div>
+              <button>
+                <div className="w-[100px] h-[35px] px-4 bg-[#0066ff] rounded-[10px] border border-[#384edd] justify-center items-center gap-2 inline-flex">
+                  <div className="text-center text-white text-sm font-semibold font-['Open Sans'] leading-[14px]">
+                    Shortlist
+                  </div>
+                </div>
+              </button>
+            </div>
+          ))}
+          <div className="mt-auto flex justify-end p-8">
+            <div className="flex items-center gap-1 text-sm font-normal">
+              <button
+                onClick={handlePrevClick}
+                disabled={currentPage === 1}
+                className={`p-2 ${currentPage === 1 ? 'text-gray-400' : 'text-black'}`}
+              >
+                <FaAngleLeft />
+              </button>
+              <span className="text-[#1f2223]">
+                Page {currentPage}
+              </span>
+              <span className="text-[#797a7b] leading-tight">
+                of {totalPages}
+              </span>
+              <button
+                onClick={handleNextClick}
+                disabled={currentPage === totalPages}
+                className={`p-2 ${currentPage === totalPages ? 'text-gray-400' : 'text-black'}`}
+              >
+                <FaAngleRight />
+              </button>
+            </div>
+          </div>
+        </div>
+
       
 
       </div>

@@ -9,9 +9,8 @@ import Facebook from "../../Assets/Facebook.png";
 import X from "../../Assets/X.png";
 import YT from "../../Assets/yt.png";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { IoIosArrowForward } from "react-icons/io";
-import { IoIosArrowBack } from "react-icons/io";
 import { FaCircleDot } from "react-icons/fa6";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
 const LiveCampaign = () => {
   const contextState = useContext(Mycontext);
@@ -251,27 +250,29 @@ const LiveCampaign = () => {
     },
   ];
 
-  const recordsPerPage = 5;
+  const itemsPerPage = 5;
 
-  const lastIndex = currentPage * recordsPerPage;
-  const firstIndex = lastIndex - recordsPerPage;
+  const lastIndex = currentPage * itemsPerPage;
+  const firstIndex = lastIndex - itemsPerPage;
   const records = campaigns.slice(firstIndex, lastIndex);
-  const npage = Math.ceil(campaigns.length / recordsPerPage);
-  const prePage = () => {
-    if (currentPage !== 1) {
+  const totalPages = Math.ceil(campaigns.length / itemsPerPage);
+  const handlePrevClick = () => {
+    if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
   };
 
-  const changePage = (id) => {
-    setCurrentPage(id);
-  };
-
-  const nextPage = () => {
-    if (currentPage !== npage) {
+  const handleNextClick = () => {
+    if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
     }
   };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const selectedInfluencers = records.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
   return (
     <div
@@ -486,6 +487,17 @@ const LiveCampaign = () => {
                           </div>
                           <div className="flex flex-col md:flex-row gap-3 md:w-1/3">
                             <div className="space-y-10 ml-4">
+                            <div>
+                                <span className="font-body text-[#797A7B] text-[12px] font-normal">
+                                  PARTICIPANTS:
+                                </span>
+                                <p className="font-body text-xl font-normal">
+                                  <span className="text-[#0062F5]">
+                                    {campaignDetails.participants}/
+                                  </span>
+                                  100
+                                </p>
+                              </div>
                               <div>
                                 <span className="font-body text-[#797A7B] text-[12px] font-normal">
                                   COMPENSATION:
@@ -496,28 +508,10 @@ const LiveCampaign = () => {
 </p>
                                 </p>
                               </div>
-                              <div>
-                                <span className="font-body text-[#797A7B] text-[12px] font-normal">
-                                  TARGET AUDIENCE:
-                                </span>
-                             
-                                           <p className="font-body text-[16px] font-normal">
-  {campaignDetails.targetAudience.join(', ')}
-</p>
-                              </div>
+                            
                             </div>
                             <div className="space-y-10 ml-16">
-                              <div>
-                                <span className="font-body text-[#797A7B] text-[12px] font-normal">
-                                  PARTICIPANTS:
-                                </span>
-                                <p className="font-body text-[16px] font-normal">
-                                  <span className="text-[#0062F5]">
-                                    {campaignDetails.participants}/
-                                  </span>
-                                  100
-                                </p>
-                              </div>
+                             
                               <div>
                                 <span className="font-body text-[#797A7B] text-[12px] font-normal">
                                   LOCATION:
@@ -562,35 +556,30 @@ const LiveCampaign = () => {
           </table>
         </div>
 
-        <nav className=" flex mt-6 items-center justify-end space-x-4 p-4">
-          <ul className="pagination flex space-x-2">
-            <li className="page-item">
+        <div className="mt-auto flex justify-end p-8">
+            <div className="flex items-center gap-1 text-sm font-normal">
               <button
-                onClick={prePage}
-                className="bg-secondary text-secondary-foreground hover:bg-secondary/80 p-2 rounded-lg"
+                onClick={handlePrevClick}
+                disabled={currentPage === 1}
+                className={`p-2 ${currentPage === 1 ? 'text-gray-400' : 'text-black'}`}
               >
-                <span>
-                  {" "}
-                  <IoIosArrowBack className="text-[#797A7B]" />
-                </span>
+                <FaAngleLeft />
               </button>
-            </li>
-            <span className="mt-1">
-              {currentPage} of {npage}
-            </span>
-
-            <li className="page-item">
+              <span className="text-[#1f2223]">
+                Page {currentPage}
+              </span>
+              <span className="text-[#797a7b] leading-tight">
+                of {totalPages}
+              </span>
               <button
-                onClick={nextPage}
-                className="bg-secondary text-secondary-foreground hover:bg-secondary/80 p-2 rounded-lg"
+                onClick={handleNextClick}
+                disabled={currentPage === totalPages}
+                className={`p-2 ${currentPage === totalPages ? 'text-gray-400' : 'text-black'}`}
               >
-                <span>
-                  <IoIosArrowForward />
-                </span>
+                <FaAngleRight />
               </button>
-            </li>
-          </ul>
-        </nav>
+            </div>
+          </div>
       </div>
     </div>
   );

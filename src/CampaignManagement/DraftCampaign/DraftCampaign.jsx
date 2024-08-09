@@ -5,8 +5,7 @@ import { CiSearch } from "react-icons/ci";
 import { LuFilter } from "react-icons/lu";
 import CampaignFilterOptions from "../Filter/CampaignFilterOptions";
 import { FaCircleDot } from "react-icons/fa6";
-import { IoIosArrowForward } from "react-icons/io";
-import { IoIosArrowBack } from 'react-icons/io';
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
 
 
@@ -23,6 +22,21 @@ const DraftCampaign = () => {
 
   const campaigns = [
     {
+      id: "C123456",
+      name: "Save Trees and More",
+      status: "Draft",
+      platform: ["Instagram", "Facebook", "Twitter"],
+      startDate: "1 July 24",
+      endDate: "10 July 24"
+    },
+    {
+      id: "C123456",
+      name: "Save Trees and More",
+      status: "Draft",
+      platform: ["Instagram", "Facebook", "Twitter"],
+      startDate: "1 July 24",
+      endDate: "10 July 24"
+    }, {
       id: "C123456",
       name: "Save Trees and More",
       status: "Draft",
@@ -67,27 +81,29 @@ const DraftCampaign = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   
-  const recordsPerPage = 5;
+  const itemsPerPage = 5;
 
-  const lastIndex = currentPage * recordsPerPage;
-  const firstIndex = lastIndex - recordsPerPage;
+  const lastIndex = currentPage * itemsPerPage;
+  const firstIndex = lastIndex - itemsPerPage;
   const records = campaigns.slice(firstIndex, lastIndex);
-  const npage = Math.ceil(campaigns.length / recordsPerPage);
-  const prePage = () => {
-    if (currentPage !== 1) {
+  const totalPages = Math.ceil(campaigns.length / itemsPerPage);
+  const handlePrevClick = () => {
+    if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
   };
 
-  const changePage = (id) => {
-    setCurrentPage(id);
+  const handleNextClick = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
   };
 
-  const nextPage = () => {
-    if (currentPage !== npage) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const selectedInfluencers = records.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
   return (
 
@@ -226,37 +242,30 @@ const DraftCampaign = () => {
           </table>
         </div>
 
-        <nav className=" flex mt-6 items-center justify-end space-x-4 p-4">
-              <ul className="pagination flex space-x-2">
-                <li className="page-item">
-                  <button
-            onClick={prePage}
-            className="bg-secondary text-secondary-foreground hover:bg-secondary/80 p-2 rounded-lg"
-          >
-            <span>
-              {" "}
-              <IoIosArrowBack className="text-[#797A7B]" />
-            </span>
-          </button>
-                </li>
-                <span className="mt-1">
-              {currentPage} of {npage}
+        <div className="mt-auto flex justify-end p-8">
+            <div className="flex items-center gap-1 text-sm font-normal">
+              <button
+                onClick={handlePrevClick}
+                disabled={currentPage === 1}
+                className={`p-2 ${currentPage === 1 ? 'text-gray-400' : 'text-black'}`}
+              >
+                <FaAngleLeft />
+              </button>
+              <span className="text-[#1f2223]">
+                Page {currentPage}
               </span>
-        
-              
-                <li className="page-item">
-                 
-                  <button
-            onClick={nextPage}
-            className="bg-secondary text-secondary-foreground hover:bg-secondary/80 p-2 rounded-lg"
-          >
-            <span>
-              <IoIosArrowForward />
-            </span>
-          </button>
-                </li>
-              </ul>
-            </nav>
+              <span className="text-[#797a7b] leading-tight">
+                of {totalPages}
+              </span>
+              <button
+                onClick={handleNextClick}
+                disabled={currentPage === totalPages}
+                className={`p-2 ${currentPage === totalPages ? 'text-gray-400' : 'text-black'}`}
+              >
+                <FaAngleRight />
+              </button>
+            </div>
+          </div>
       </div>
     </div>
 

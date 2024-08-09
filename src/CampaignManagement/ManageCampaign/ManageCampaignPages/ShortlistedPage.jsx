@@ -1,63 +1,143 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from "react";
 import Instagram from "../../../Assets/instagram.png";
 import Facebook from "../../../Assets/Facebook.png";
 import X from "../../../Assets/X.png";
 import YT from "../../../Assets/yt.png";
 import { Link, useLocation } from "react-router-dom";
-import { Mycontext } from '../../../utils/Context';
-import ReadMore from '../../Components/ReadMoreComponent';
+import { Mycontext } from "../../../utils/Context";
+import ReadMore from "../../Components/ReadMoreComponent";
 import { MdChevronRight } from "react-icons/md";
-
-
+import { LuArrowUpRight, LuFilter } from "react-icons/lu";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
 const ShortlistedPage = () => {
+  const contextState = useContext(Mycontext);
+  const expanded = contextState.expanded;
+  const location = useLocation();
+  const currentPath = location.pathname;
 
-    const contextState = useContext(Mycontext);
-    const expanded = contextState.expanded;
-    const location = useLocation();
-    const currentPath = location.pathname;
+  const campaignDetails = {
+    about:
+      "Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis nam voluptatum nobis id rerum. Sunt, neque. Explicabo cupiditate doloribus iste nesciunt possimus aperiam vero odit velit. Dolores, nisi perferendis eaque libero omnis repellendus! Odit ipsam in impedit aut obcaecati, et fugiat doloribus nam vitae voluptatem eveniet ipsa sunt eius soluta officiis delectus sed reiciendis maxime quas. Aperiam inventore ipsa illum animi ducimus sit, quas vitae! consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio.",
+    compensation: ["Product", "Money"], // Array of compensation types
+    targetAudience: ["Men", "Women"], // Array of target audiences
+    participants: 10, // Number of participants
+    location: ["New Delhi, India", "New Delhi, India", "New Delhi, India"],
+  };
+  const platforms = [
+    {
+      name: "Instagram",
+      icon: Instagram,
+      bgColor: "#FFEDED",
+    },
+    {
+      name: "X",
+      icon: X,
+      bgColor: "#E3E3E3",
+    },
+    {
+      name: "Facebook",
+      icon: Facebook,
+      bgColor: "#E4EFFF",
+    },
+    {
+      name: "Youtube",
+      icon: YT,
+      bgColor: "#FFE4E1",
+    },
+  ];
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
-    const campaignDetails = {
-      about:
-        "Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis nam voluptatum nobis id rerum. Sunt, neque. Explicabo cupiditate doloribus iste nesciunt possimus aperiam vero odit velit. Dolores, nisi perferendis eaque libero omnis repellendus! Odit ipsam in impedit aut obcaecati, et fugiat doloribus nam vitae voluptatem eveniet ipsa sunt eius soluta officiis delectus sed reiciendis maxime quas. Aperiam inventore ipsa illum animi ducimus sit, quas vitae! consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio.",
-      compensation: ["Product", "Money"], // Array of compensation types
-      targetAudience: ["Men", "Women"], // Array of target audiences
-      participants: 10, // Number of participants
-      location: ["New Delhi, India", "New Delhi, India", "New Delhi, India"],
-    };
-    const platforms = [
-      {
-        name: "Instagram",
-        icon: Instagram,
-        bgColor: "#FFEDED",
+  const toggleModal = () => {
+    setIsModalVisible(!isModalVisible);
+  };
+
+  const influencers = [
+    {
+      name: "Gautam Sachdeva",
+      niche: ["Travel","Fashion"],
+      platforms: {
+        instagram: "Instagram",
+        facebook: "Facebook",
+        youtube: "Youtube",
+        linkedin: "LinkedIn",
       },
-      {
-        name: "X",
-        icon: X,
-        bgColor: "#E3E3E3",
+    },
+    {
+      name: "Gautam Sachdeva",
+      niche: ["Travel", "Fashion","Clothes","foods"],
+      platforms: {
+        instagram: "Instagram",
+        facebook: "Facebook",
+        youtube: "Youtube",
+        linkedin: "LinkedIn",
       },
-      {
-        name: "Facebook",
-        icon: Facebook,
-        bgColor: "#E4EFFF",
+    },
+    {
+      name: "Gautam Sachdeva",
+      niche: ["Travel", "Fashion","Clothes","foods","hjhfjh","hjhf"],
+      platforms: {
+        instagram: "Instagram",
+        facebook: "Facebook",
+        youtube: "Youtube",
+        linkedin: "LinkedIn",
       },
-      {
-        name: "Youtube",
-        icon: YT,
-        bgColor: "#FFE4E1",
+    },
+    {
+      name: "Gautam Sachdeva",
+      niche: ["Travel", "Fashion","Clothes","foods","hhg"],
+      platforms: {
+        instagram: "Instagram",
+        facebook: "Facebook",
+        youtube: "Youtube",
+        linkedin: "LinkedIn",
       },
-    ];
-    
+    },
+    {
+      name: "Gautam Sachdeva",
+      niche: ["Travel", "Fashion","Clothes","foods","ythhfj","hjkrj"],
+      platforms: {
+        instagram: "Instagram",
+        facebook: "Facebook",
+        youtube: "Youtube",
+        linkedin: "LinkedIn",
+      },
+    },
+
+    // Add more influencers here as needed
+  ];
+
+  const itemsPerPage = 4; // Number of influencers to display per page
+  const totalPages = Math.ceil(influencers.length / itemsPerPage);
+
+  const handlePrevClick = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextClick = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const selectedInfluencers = influencers.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
+
   return (
     <div
-    class={` flex relative  ${
-      !expanded
-        ? "left-[100px] w-[calc(100%-110px)]"
-        : "left-[320px] w-[calc(100%-320px)]"
-    }  overflow-y-auto  bg-white space-y-4 p-4 `}
-  >
-
-<div className="flex flex-col">
+      class={` flex relative  ${
+        !expanded
+          ? "left-[100px] w-[calc(100%-110px)]"
+          : "left-[320px] w-[calc(100%-320px)]"
+      }  overflow-y-auto  bg-white space-y-4 p-4 `}
+    >
+      <div className="flex flex-col">
         <div className="flex flex-row p-6 items-center  border-b-2 gap-[3.14px]">
           <Link
             to="/CampaignManagement"
@@ -70,10 +150,7 @@ const ShortlistedPage = () => {
             Campaign Management
             <MdChevronRight className="m-1 items-center" size={"15.7px"} />
           </Link>
-          <Link
-           
-            className={`text-[16px] font-semibold text-[#2463eb] gap-x-2`}
-          >
+          <Link className={`text-[16px] font-semibold text-[#2463eb] gap-x-2`}>
             Manage Campaign
           </Link>
         </div>
@@ -114,12 +191,12 @@ const ShortlistedPage = () => {
                 <span className="font-body text-[#797A7B] text-[12px] font-normal">
                   PARTICIPANTS:
                 </span>
-                <p className="font-body text-[16px] font-normal">
-                                  <span className="text-[#0062F5]">
-                                    {campaignDetails.participants} {""}/
-                                  </span>{" "}
-                                  100
-                                </p>
+                <p className="font-body text-xl font-normal">
+                  <span className="text-[#0062F5]">
+                    {campaignDetails.participants} {""}/
+                  </span>{" "}
+                  100
+                </p>
               </div>
 
               <div>
@@ -127,8 +204,8 @@ const ShortlistedPage = () => {
                   COMPENSATION:
                 </span>
                 <p className="font-body text-[16px] font-normal">
-  {campaignDetails.compensation.join(', ')}
-</p>
+                  {campaignDetails.compensation.join(", ")}
+                </p>
               </div>
             </div>
             <div className="space-y-10">
@@ -166,7 +243,7 @@ const ShortlistedPage = () => {
                     : "text-muted hover:text-muted-foreground"
                 }`}
               >
-               Interest Received
+                Interest Received
               </button>
             </Link>
             <Link to="/Shortlisted">
@@ -188,7 +265,7 @@ const ShortlistedPage = () => {
                     : "text-muted hover:text-muted-foreground"
                 }`}
               >
-               Approved
+                Approved
               </button>
             </Link>
             <Link to="/Rejected">
@@ -199,7 +276,7 @@ const ShortlistedPage = () => {
                     : "text-muted hover:text-muted-foreground"
                 }`}
               >
-               Rejected
+                Rejected
               </button>
             </Link>
             <Link to="/AIRecommended">
@@ -210,24 +287,111 @@ const ShortlistedPage = () => {
                     : "text-muted hover:text-muted-foreground"
                 }`}
               >
-              AI Recommended
+                AI Recommended
               </button>
             </Link>
-          
           </div>
           <div className="relative">
             <span className="absolute top-0 left-0 transform translate-x-1/2 -translate-y-1/2 bg-destructive rounded-full w-2.5 h-2.5"></span>
           </div>
         </div>
 
-AVANTI
-      
+        <div className="mt-8">
+          <div className="flex text-[12px] font-sans font-semibold text-[#797a7b] ml-4">
+            <div className="w-[185px]">INFLUENCER NAME</div>
+            <div className="w-[230px]">NICHE</div>
+            <div className="w-[135px]">INSTAGRAM</div>
+            <div className="w-[125px]">FACEBOOK</div>
+            <div className="w-[115px]">YOUTUBE</div>
+            <div className="">LINKEDIN</div>
+          </div>
+          <hr className="border-t border-[#d2d3d3] my-3" />
 
+          {selectedInfluencers.map((influencer, index) => (
+            <div
+              key={index}
+              className="h-[99px] py-8 border-b border-[#d2d3d3] flex justify-start items-center ml-4 text-nowrap gap-[69px]"
+            >
+              <div className="flex justify-start items-center gap-[34px]">
+                <div className="flex justify-start items-center gap-[31px]">
+                  <div className="flex justify-start items-center gap-[37px]">
+                    <div className="w-[138px] h-[22px] text-[#191d23] text-base font-normal font-['Open Sans']">
+                      {influencer.name}
+                    </div>
+                    <div className="text-[#191d23] text-base font-normal w-[210px] text-nowrap font-['Open Sans']">
+                      {influencer.niche[0]} <span className={`${influencer.niche[1] ? "inline-block": "hidden" }`}>,</span> {influencer.niche[1] && influencer.niche[1]} <span className={`${influencer.niche[2] ? "inline-block": "hidden" }`}>,</span> <span className={`${influencer.niche.length > 2 ? "inline-block": "hidden" }`}>+</span> {
+                        <span className={`${influencer.niche.length <= 2 && 'hidden'} `}>{influencer.niche.length - 2}</span>
+                      }
+                    </div>
+                  </div>
+                  <button className="flex justify-start items-center">
+                    <a href='https://www.instagram.com/' className="text-[#191d23] flex text-base font-normal font-['Open Sans'] w-[100px]">
+                      {influencer.platforms.instagram}
+                      <LuArrowUpRight className="ml-1 mt-1 text-[#0066ff]" />
+                    </a>
+                  </button>
+                </div>
+                <button className="flex justify-start items-center">
+                  <a href="https://www.facebook.com/login/" className="text-[#191d23] flex text-base font-normal font-['Open Sans']">
+                    {influencer.platforms.facebook}
+                    <LuArrowUpRight className="ml-1 mt-1 text-[#0066ff]" />
+                  </a>
+                </button>
+                <button className="flex justify-start items-center">
+                  <a href="https://www.youtube.com/" className="text-[#191d23] text-base flex font-normal font-['Open Sans']">
+                    {influencer.platforms.youtube}
+                    <LuArrowUpRight className="ml-1 mt-1 text-[#0066ff]" />
+                  </a>
+                </button>
+                <button className="flex justify-start items-center">
+                  <a href="https://www.linkedin.com/" className="text-[#191d23] text-base font-normal flex font-['Open Sans']">
+                    {influencer.platforms.linkedin}
+                    <LuArrowUpRight className="ml-1 mt-1 text-[#0066ff]" />
+                  </a>
+                </button>
+              </div>
+              <div className="font-semibold font-['Open Sans']">
+                <button className="text-[#e32828] relative w-[10px]">
+                  Reject
+                </button>
+              </div>
+              <button>
+                <div className="w-[100px] h-[35px] px-4 bg-[#09bf4c] rounded-[10px] border border-[#09bf4c] justify-center items-center gap-2 inline-flex">
+                  <div className="text-center text-white text-sm font-semibold font-['Open Sans'] leading-[14px]">
+                    Approve
+                  </div>
+                </div>
+              </button>
+            </div>
+          ))}
+             <div className="mt-auto flex justify-end p-8">
+            <div className="flex items-center gap-1 text-sm font-normal">
+              <button
+                onClick={handlePrevClick}
+                disabled={currentPage === 1}
+                className={`p-2 ${currentPage === 1 ? 'text-gray-400' : 'text-black'}`}
+              >
+                <FaAngleLeft />
+              </button>
+              <span className="text-[#1f2223]">
+                Page {currentPage}
+              </span>
+              <span className="text-[#797a7b] leading-tight">
+                of {totalPages}
+              </span>
+              <button
+                onClick={handleNextClick}
+                disabled={currentPage === totalPages}
+                className={`p-2 ${currentPage === totalPages ? 'text-gray-400' : 'text-black'}`}
+              >
+                <FaAngleRight />
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-
-
     </div>
-  )
-}
+  );
+};
 
-export default ShortlistedPage
+export default ShortlistedPage;
