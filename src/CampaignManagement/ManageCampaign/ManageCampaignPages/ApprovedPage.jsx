@@ -191,18 +191,18 @@ const ApprovedPage = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col md:flex-row gap-1 md:w-1/3">
+          <div className="flex flex-col md:flex-row gap-3 md:w-1/3">
             <div className="space-y-10 ml-4">
               <div>
                 <span className="font-body text-[#797A7B] text-[12px] font-normal">
                   PARTICIPANTS:
                 </span>
                 <p className="font-body text-xl font-normal">
-                  <span className="text-[#0062F5]">
-                    {campaignDetails.participants} {""}/
-                  </span>{" "}
-                  100
-                </p>
+                                  <span className="text-[#0062F5]">
+                                    {campaignDetails.participants} {""}/
+                                  </span>{" "}
+                                  100
+                                </p>
               </div>
 
               <div>
@@ -210,8 +210,8 @@ const ApprovedPage = () => {
                   COMPENSATION:
                 </span>
                 <p className="font-body text-[16px] font-normal">
-                  {campaignDetails.compensation.join(', ')}
-                </p>
+  {campaignDetails.compensation.join(', ')}
+</p>
               </div>
             </div>
             <div className="space-y-10">

@@ -7,7 +7,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Mycontext } from "../../../utils/Context";
 import ReadMore from "../../Components/ReadMoreComponent";
 import { MdChevronRight } from "react-icons/md";
-import { LuArrowUpRight, LuFilter } from "react-icons/lu";
+import { FiArrowUpRight } from "react-icons/fi";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
 const ShortlistedPage = () => {
@@ -46,12 +46,8 @@ const ShortlistedPage = () => {
       bgColor: "#FFE4E1",
     },
   ];
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
 
-  const toggleModal = () => {
-    setIsModalVisible(!isModalVisible);
-  };
+  const [currentPage, setCurrentPage] = useState(1);
 
   const influencers = [
     {
@@ -107,9 +103,14 @@ const ShortlistedPage = () => {
 
     // Add more influencers here as needed
   ];
+  const recordsPerPage = 4;
 
+  const lastIndex = currentPage * recordsPerPage;
+  const firstIndex = lastIndex - recordsPerPage;
+  const records = influencers.slice(firstIndex, lastIndex);
+  const totalPages = Math.ceil(influencers.length / recordsPerPage);
   const itemsPerPage = 4; // Number of influencers to display per page
-  const totalPages = Math.ceil(influencers.length / itemsPerPage);
+ 
 
   const handlePrevClick = () => {
     if (currentPage > 1) {
@@ -192,11 +193,11 @@ const ShortlistedPage = () => {
                   PARTICIPANTS:
                 </span>
                 <p className="font-body text-xl font-normal">
-                  <span className="text-[#0062F5]">
-                    {campaignDetails.participants} {""}/
-                  </span>{" "}
-                  100
-                </p>
+                                  <span className="text-[#0062F5]">
+                                    {campaignDetails.participants} {""}/
+                                  </span>{" "}
+                                  100
+                                </p>
               </div>
 
               <div>
@@ -204,8 +205,8 @@ const ShortlistedPage = () => {
                   COMPENSATION:
                 </span>
                 <p className="font-body text-[16px] font-normal">
-                  {campaignDetails.compensation.join(", ")}
-                </p>
+  {campaignDetails.compensation.join(', ')}
+</p>
               </div>
             </div>
             <div className="space-y-10">
@@ -295,77 +296,68 @@ const ShortlistedPage = () => {
             <span className="absolute top-0 left-0 transform translate-x-1/2 -translate-y-1/2 bg-destructive rounded-full w-2.5 h-2.5"></span>
           </div>
         </div>
+       
+        <div class="">
+          <table class="min-w-full  bg-white ">
+          <thead>
+              <tr class=" border-b  uppercase " style={{ height: "80px" }}>
+                <th class="py-3 px-6 text-left text-[#797A7B] text-[12px] font-body font-semibold">Influencer Name</th>
+                <th class="py-3 px-6 text-left text-[#797A7B] text-[12px] font-body font-semibold">Niche</th>
+                <th class="py-3 px-6 text-left text-[#797A7B] text-[12px] font-body font-semibold">Instagram</th>
+                <th class="py-3 px-6 text-left text-[#797A7B] text-[12px] font-body font-semibold">Facebook</th>
+                <th class="py-3 px-6 text-left text-[#797A7B] text-[12px] font-body font-semibold">Youtube</th>
+                <th class="py-3 px-6 text-left text-[#797A7B] text-[12px] font-body font-semibold">LinkedIn</th>
 
-        <div className="mt-8">
-          <div className="flex text-[12px] font-sans font-semibold text-[#797a7b] ml-4">
-            <div className="w-[185px]">INFLUENCER NAME</div>
-            <div className="w-[230px]">NICHE</div>
-            <div className="w-[135px]">INSTAGRAM</div>
-            <div className="w-[125px]">FACEBOOK</div>
-            <div className="w-[115px]">YOUTUBE</div>
-            <div className="">LINKEDIN</div>
-          </div>
-          <hr className="border-t border-[#d2d3d3] my-3" />
-
-          {selectedInfluencers.map((influencer, index) => (
-            <div
-              key={index}
-              className="h-[99px] py-8 border-b border-[#d2d3d3] flex justify-start items-center ml-4 text-nowrap gap-[69px]"
-            >
-              <div className="flex justify-start items-center gap-[34px]">
-                <div className="flex justify-start items-center gap-[31px]">
-                  <div className="flex justify-start items-center gap-[37px]">
-                    <div className="w-[138px] h-[22px] text-[#191d23] text-base font-normal font-['Open Sans']">
-                      {influencer.name}
-                    </div>
-                    <div className="text-[#191d23] text-base font-normal w-[210px] text-nowrap font-['Open Sans']">
-                    <td className="py-3 px-4 text-[#191D23] text-[16px] font-body font-normal">
+              </tr>
+            </thead>
+            <tbody class=" "  >
+              {records.map((influencer, index) => (
+                <tr className="border-b" key={index} style={{ height: "85px" }}>
+                  <td className="py-3 px-6 text-[#191D23] text-[16px] font-body font-normal">{influencer.name}</td>
+                  <td className="py-3 px-4 text-[#191D23] text-[16px] font-body font-normal">
                     {influencer.niche.length > 2
                       ? `${influencer.niche.slice(0, 2).join(', ')} +${influencer.niche.length - 2}`
                       : influencer.niche.join(', ')}
                   </td>
-                    </div>
-                  </div>
-                  <button className="flex justify-start items-center">
-                    <a href='https://www.instagram.com/' className="text-[#191d23] flex text-base font-normal font-['Open Sans'] w-[100px]">
-                      {influencer.platforms.instagram}
-                      <LuArrowUpRight className="ml-1 mt-1 text-[#0066ff]" />
+                  <td className="py-3 px-6 text-[#191D23] text-[16px] font-body font-normal">
+                    <a className="flex items-center" href={influencer.platforms.instagram}>
+                    Instagram 
+                      <FiArrowUpRight className="ml-1  text-[#0066ff]" />
+
                     </a>
-                  </button>
-                </div>
-                <button className="flex justify-start items-center">
-                  <a href="https://www.facebook.com/login/" className="text-[#191d23] flex text-base font-normal font-['Open Sans']">
-                    {influencer.platforms.facebook}
-                    <LuArrowUpRight className="ml-1 mt-1 text-[#0066ff]" />
-                  </a>
-                </button>
-                <button className="flex justify-start items-center">
-                  <a href="https://www.youtube.com/" className="text-[#191d23] text-base flex font-normal font-['Open Sans']">
-                    {influencer.platforms.youtube}
-                    <LuArrowUpRight className="ml-1 mt-1 text-[#0066ff]" />
-                  </a>
-                </button>
-                <button className="flex justify-start items-center">
-                  <a href="https://www.linkedin.com/" className="text-[#191d23] text-base font-normal flex font-['Open Sans']">
-                    {influencer.platforms.linkedin}
-                    <LuArrowUpRight className="ml-1 mt-1 text-[#0066ff]" />
-                  </a>
-                </button>
-              </div>
-              <div className="font-semibold font-['Open Sans']">
-                <button className="text-[#e32828] relative w-[10px]">
-                  Reject
-                </button>
-              </div>
-              <button>
-                <div className="w-[100px] h-[35px] px-4 bg-[#09bf4c] rounded-[10px] border border-[#09bf4c] justify-center items-center gap-2 inline-flex">
-                  <div className="text-center text-white text-sm font-semibold font-['Open Sans'] leading-[14px]">
-                    Approve
-                  </div>
-                </div>
-              </button>
-            </div>
-          ))}
+                  </td>
+                  <td className="py-3 px-6 text-[#191D23] text-[16px] font-body font-normal">
+                    <a className="flex items-center" href={influencer.platforms.facebook}>
+                    facebook
+                      <FiArrowUpRight className="ml-1  text-[#0066ff]" />
+
+                    </a>                  </td>
+                  <td className="py-3 px-6 text-[#191D23] text-[16px] font-body font-normal">
+                    <a className="flex items-center" href={influencer.platforms.youtube}>
+                    youtube
+                      <FiArrowUpRight className="ml-1  text-[#0066ff]" />
+
+                    </a>                  </td>
+                  <td className="py-3 px-6 text-[#191D23] text-[16px] font-body font-normal">
+                    <a className="flex items-center" href={influencer.platforms.linkedin}>
+                    linkedin
+                      <FiArrowUpRight className="ml-1  text-[#0066ff]" />
+
+                    </a>                  </td>
+                  <td className="py-3 px-6 text-[14px] font-body font-semibold">
+                    <Link>
+                       <button className="bg-[#0066FF] text-[#FFFFFF] py-2 px-3 rounded-lg">Proof of Work</button>
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+
+        <div className="mt-8">
+         
              <div className="mt-auto flex justify-end p-8">
             <div className="flex items-center gap-1 text-sm font-normal">
               <button

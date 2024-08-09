@@ -192,18 +192,18 @@ const RejectedPage = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col md:flex-row gap-1 md:w-1/3">
+          <div className="flex flex-col md:flex-row gap-3 md:w-1/3">
             <div className="space-y-10 ml-4">
               <div>
                 <span className="font-body text-[#797A7B] text-[12px] font-normal">
                   PARTICIPANTS:
                 </span>
                 <p className="font-body text-xl font-normal">
-                  <span className="text-[#0062F5]">
-                    {campaignDetails.participants} {""}/
-                  </span>{" "}
-                  100
-                </p>
+                                  <span className="text-[#0062F5]">
+                                    {campaignDetails.participants} {""}/
+                                  </span>{" "}
+                                  100
+                                </p>
               </div>
 
               <div>
@@ -211,8 +211,8 @@ const RejectedPage = () => {
                   COMPENSATION:
                 </span>
                 <p className="font-body text-[16px] font-normal">
-                  {campaignDetails.compensation.join(', ')}
-                </p>
+  {campaignDetails.compensation.join(', ')}
+</p>
               </div>
             </div>
             <div className="space-y-10">
@@ -347,8 +347,8 @@ const RejectedPage = () => {
 
                     </a>                  </td>
                   <td className="py-3 px-6 text-[14px] font-body font-semibold">
-                   <Link>
-                    <button className="bg-[#0066FF] text-[#FFFFFF] py-2 px-5 rounded-lg">Shortist</button>
+                    <Link>
+                       <button className="bg-[#0066FF] text-[#FFFFFF] py-2 px-3 rounded-lg">Proof of Work</button>
                     </Link>
                   </td>
                 </tr>
