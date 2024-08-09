@@ -348,7 +348,7 @@ const RejectedPage = () => {
                     </a>                  </td>
                   <td className="py-3 px-6 text-[14px] font-body font-semibold">
                     <Link>
-                       <button className="bg-[#0066FF] text-[#FFFFFF] py-2 px-3 rounded-lg">Proof of Work</button>
+                    <button className="bg-[#0066FF] text-[#FFFFFF] py-2 px-5 rounded-lg">Shortist</button>
                     </Link>
                   </td>
                 </tr>
